@@ -10,8 +10,8 @@
     "format": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}",
     "build": "rimraf dist && tsc --project tsconfig.build.json && resolve-tspaths",
     "dist": "rimraf bin && npm run build && javascript-obfuscator ./dist --output ./bin",
-    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register -r dotenv/config src/index.ts",
-    "start": "node -r dotenv/config bin/src/index.js"
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register -r dotenv/config src/main.ts",
+    "start": "node -r dotenv/config bin/src/main.js"
   },
   "license": "ISC",
   "dependencies": {
