@@ -1,0 +1,30 @@
+FROM node:23.3.0-bookworm-slim
+
+# Atualizando e instalando dependências necessárias
+RUN apt-get update -y && \
+  apt-get install -y git && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+# Atualizando npm e instalando dotenv-cli globalmente
+RUN npm install -g npm && \
+  npm install -g dotenv-cli
+
+# Mudando para o usuário node
+USER node
+
+# Definindo o diretório de trabalho
+WORKDIR /gateway
+
+# Copiando os arquivos package.json e package-lock.json e instalando dependências
+COPY --chown=node:node package*.json ./
+RUN npm ci
+
+# Copiando o restante do código fonte
+COPY --chown=node:node . .
+
+EXPOSE 8080
+EXPOSE 8088
+
+# Definindo o comando padrão
+CMD ["tail", "-f", "/dev/null"]
