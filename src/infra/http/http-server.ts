@@ -2,7 +2,8 @@ import compression from 'compression';
 import cors from 'cors';
 import express, { Express, Router } from 'express';
 import helmet from 'helmet';
-import { Logger } from './logger';
+import { Logger } from '../logger';
+import { createAuthRoutes } from 'src/auth';
 
 export class HttpServer {
   private app: Express;
@@ -34,5 +35,7 @@ export class HttpServer {
   private async loadRoutes(): Promise<void> {
     const router = Router();
     this.app.use(router);
+
+    createAuthRoutes(this.app);
   }
 }

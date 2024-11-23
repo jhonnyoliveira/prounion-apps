@@ -1,4 +1,4 @@
-import { HttpServer } from './infra/http-server';
+import { HttpServer } from './infra/http';
 import { Logger, PinoLogger } from './infra/logger';
 
 process.env.TZ = 'America/Sao_Paulo';
